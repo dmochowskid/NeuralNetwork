@@ -2,7 +2,7 @@ import sys, csv, numpy as np
 
 from numpy import exp as e
 
-from NeuralNetwork.NeuralNetworkConfiguration import NeuralNetworkConfiguration
+from NeuralNetwork.NetworkSettings import NetworkSettings
 
 layerscount = 2;
 weightM = []
@@ -106,7 +106,6 @@ class Network(object):
 
         # for data in batch perform backpropagation algorithm
         for x, y in mini_batch:
-            # get ???
             delta_nabla_b, delta_nabla_w = self._do_backpropagation(x, y, use_bias)
             nabla_b = [nb + dnb for nb, dnb in zip(nabla_b, delta_nabla_b)]
             nabla_w = [nw + dnw for nw, dnw in zip(nabla_w, delta_nabla_w)]
