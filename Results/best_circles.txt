@@ -1,0 +1,14 @@
+verbose : 1
+batch_size : 1
+testing_set_path : Data\Classification\data.circles.test.10000.csv
+learning_set_path : Data\Classification\data.circles.train.10000.csv
+epochs : 50
+split_for_eval_percent : 0.1
+#1 - polar (logistic function), 2 - bipolar (arctan)
+activation_function : 1
+inertia_ratio : 0
+learning_rate : 0.1
+#1 - classification, 2 - regression
+problem_type : 1
+layers : [2, 40, 4]
+bias : False
