@@ -37,14 +37,27 @@ class Network(object):
     def feedforward_batch(self, data, problem_type):
         result = []
         for sample in data:
+            if problem_type == 1:
+                point = sample[:2]
+                ret = self.feedforward(np.asmatrix((point)).T)
+                result.append(np.array([sample[0], point[1], np.argmax(ret) + 1]))
+            elif problem_type == 2:
+                point = sample[:1]
+                ret = self.feedforward(np.asmatrix((point)).T)
+                if isinstance(point, list):
+                    result.append(np.array([point[0], ret]))
+                else:
+                    result.append(np.array([point, ret]))
+        return result
+
+    def feedforward_batch_with_only_result(self, data, problem_type):
+        result = []
+        for sample in data:
             ret = self.feedforward(np.asmatrix((sample)).T)
             if problem_type == 1:
-                result.append(np.array([sample[0], sample[1], np.argmax(ret) + 1]))
-            elif problem_type == 2:
-                if isinstance(sample, list):
-                    result.append(np.array([sample[0], ret]))
-                else:
-                    result.append(np.array([sample, ret]))
+                result.append(np.array(np.argmax(ret) + 1))
+            else:
+                result.append(np.array(ret))
         return result
 
     def feedforward(self, a):

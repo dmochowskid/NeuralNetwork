@@ -1,10 +1,12 @@
 import random
 import datetime
+from matplotlib.colors import ListedColormap
 
 from NeuralNetwork.Network import Network
 from NeuralNetwork.NetworkSettings import NetworkSettings
 from Helpers import *
 
+cmap_light = ListedColormap(['#8716b7', '#2bc6bf', '#c4b215'])
 
 def start():
     # Network settings
@@ -36,20 +38,54 @@ def start():
     if settings.evaluate_learning_process:
        if settings.problem_type == 1:
             NN.error = [x * 100 for x in NN.error]  # error per batch in %
-            show_plots(NN.error, result)
+            show_plots(settings, NN, result)
        else:
-            show_plots(NN.error, result)
+            show_plots(settings, NN, result)
 
-def show_plots(error_values, result):
+def show_plots(settings, NN, result):
     plt.ylabel('Error')
     plt.xlabel('Epoch number')
     plt.title('NN error for epoch')
-    plt.plot(error_values)
+    plt.plot(NN.error)
 
-    create_graph_for_data(np.asmatrix(np.array(result)))
-    plt.ylabel('Y')
-    plt.xlabel('X')
+    plt.figure()
 
+    if settings.problem_type == 1:
+        h = .01
+        x_min, x_max = -1, 1
+        y_min, y_max = -1, 1
+        xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
+        mesh_points = np.c_[xx.ravel(), yy.ravel()]
+
+        z = np.array(NN.feedforward_batch_with_only_result(mesh_points, settings.problem_type))
+        z = z.reshape(xx.shape)
+
+        x = []
+        y = []
+        s = []
+        for e in settings.testing_data:
+            x.append(e[0])
+            y.append(e[1])
+            s.append(e[2])
+        plt.pcolormesh(xx, yy, z, cmap=cmap_light)
+        plt.scatter(x=x, y=y, s=np.ones(len(x)), c=s)
+
+        plt.xlim(x_min, x_max)
+        plt.ylim(y_min, y_max)
+
+        # create_graph_for_data(np.asmatrix(np.array(result)))
+        plt.ylabel('Y')
+        plt.xlabel('X')
+    else:
+        x = []
+        y = []
+        for e in settings.testing_data:
+            x.append(e[0])
+            y.append(e[1])
+        fig, ax = plt.subplots()
+        ax.scatter(x=x, y=y)
+        ax.grid(True)
+        fig.tight_layout()
     plt.show()
 
 if __name__ == "__main__":
