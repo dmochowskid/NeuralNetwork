@@ -28,34 +28,28 @@ def start():
                               epochs=settings.epochs,
                               mini_batch_size=settings.batch_size,
                               learning_rate=settings.learning_rate,
-                              use_bias= settings.bias,
+                              use_bias=settings.bias,
                               test_data=evaluation_set)
 
     result = NN.feedforward_batch(settings.testing_data, settings.problem_type)
 
-    output_file = 'output' + str(datetime.datetime.now().isoformat().replace('.','-').replace(':', '-'))
-    np.savetxt(output_file + '.csv', np.array(result), delimiter=',')
-    settings.to_file(output_file + '.txt')
-
     if settings.evaluate_learning_process:
-        if settings.problem_type == 1:
-            output_file_error = 'error' + str(datetime.datetime.now().isoformat().replace('.', '-').replace(':', '-'))
+       if settings.problem_type == 1:
             NN.error = [x * 100 for x in NN.error]  # error per batch in %
-            plot_error(NN.error)
-            np.savetxt(output_file_error + '.csv', np.array(NN.error), delimiter=',')
-        else:
-            output_file_error = 'error' + str(
-                datetime.datetime.now().isoformat().replace('.', '-').replace(':', '-'))
-            plot_error(NN.error)
-            np.savetxt(output_file_error + '.csv', np.array(NN.error), delimiter=',')
+            show_plots(NN.error, result)
+       else:
+            show_plots(NN.error, result)
 
-def plot_error(error_values):
+def show_plots(error_values, result):
     plt.ylabel('Error')
     plt.xlabel('Epoch number')
     plt.title('NN error for epoch')
     plt.plot(error_values)
-    axes = plt.gca()
-    # axes.set_ylim([0, 110])
+
+    create_graph_for_data(np.asmatrix(np.array(result)))
+    plt.ylabel('Y')
+    plt.xlabel('X')
+
     plt.show()
 
 if __name__ == "__main__":
