@@ -85,11 +85,11 @@ def show_plots(settings, NN, result):
 
         y_own = np.asmatrix(np.array(result))
         sorted_data = np.sort(y_own, axis=0)
-        x2 = get_column(sorted_data, 0)
-        y2 = get_column(sorted_data, 1)
+        x2 = get_column(sorted_data, 0)[0].tolist()
+        y2 = get_column(sorted_data, 1)[0].tolist()
 
         plt.plot(x , y)
-        plt.plot(x2.tolist() , y2.tolist())
+        plt.plot(x2, y2)
         plt.legend(['Test', 'Estimate'], loc='upper left')
         plt.grid(True)
         plt.ylabel('Y')
