@@ -82,10 +82,19 @@ def show_plots(settings, NN, result):
         for e in settings.testing_data:
             x.append(e[0])
             y.append(e[1])
-        fig, ax = plt.subplots()
-        ax.scatter(x=x, y=y)
-        ax.grid(True)
-        fig.tight_layout()
+
+        y_own = np.asmatrix(np.array(result))
+        sorted_data = np.sort(y_own, axis=0)
+        x2 = get_column(sorted_data, 0)
+        y2 = get_column(sorted_data, 1)
+
+        plt.plot(x , y)
+        plt.plot(x2.tolist() , y2.tolist())
+        plt.legend(['Test', 'Estimate'], loc='upper left')
+        plt.grid(True)
+        plt.ylabel('Y')
+        plt.xlabel('X')
+
     plt.show()
 
 if __name__ == "__main__":

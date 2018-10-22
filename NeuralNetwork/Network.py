@@ -196,7 +196,6 @@ class Network(object):
     def cost_derivative(self, output_activations, y):
         return output_activations - y
 
-
 def sigmoid(z, function_type=1):
     if function_type == 1:
         return 1.0 / (1.0 + e(-z))  # logistic function

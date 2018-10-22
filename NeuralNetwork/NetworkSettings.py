@@ -19,7 +19,8 @@ class NetworkSettings():
         self.split_for_eval_percent = 0.1  # if verbose marked split 10% of input data for "evaluation after each epoch"
         self.learning_set_path = 'Data/Regression/data.cube.train.1000.csv'
         self.testing_set_path = 'Data/Regression/data.cube.test.1000.csv'
-
+        #self.learning_set_path = 'Data/Classification/data.simple.train.1000.csv'
+        #self.testing_set_path = 'Data/Classification/data.simple.test.1000.csv'
         data = np.loadtxt(self.learning_set_path, delimiter=',', skiprows=1)
         self.learning_data = data
 
