@@ -17,7 +17,7 @@ def start():
 
     # test
     # random_image = get_random_image(settings.column_size, settings.row_size)
-    noised_image = add_noise(images[4], settings.noise)
+    noised_image = add_noise(images[2], settings.noise)
     result_image = hopfield_neural_network.run(np.array(noised_image))
     show_plot(result_image, "Result", False)
 

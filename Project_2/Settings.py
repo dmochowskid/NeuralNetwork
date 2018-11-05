@@ -4,8 +4,8 @@ class Settings:
         self.row_size = int()
         self.column_size = int()
 
-        self._prepare_demo_animals()
-        self.noise = 0.1
+        self._prepare_demo_large_plus()
+        self.noise = 0.2
 
     def _prepare_demo_small(self):
         self.input_data_path = "./Data/small-7x7.csv"
