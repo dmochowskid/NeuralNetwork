@@ -16,6 +16,14 @@ def two_images_are_equal(first, second):
     return first.equal(second)
 
 
+def add_noise(image, noise):
+    for column in image:
+        for i in range(len(column)):
+            change_value = random.random() < noise
+            if change_value:
+                column[i] = -1 if column[i] == 1 else 1
+    return image
+
 def get_random_image(column_size, row_size):
     random_image = np.empty([column_size, row_size], dtype=int)
     for column in random_image:

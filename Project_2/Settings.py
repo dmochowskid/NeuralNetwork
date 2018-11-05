@@ -5,7 +5,7 @@ class Settings:
         self.column_size = int()
 
         self._prepare_demo_small()
-        self.neuron_size = 50
+        self.noise = 0.1
 
     def _prepare_demo_small(self):
         self.input_data_path = "./Data/small-7x7.csv"
