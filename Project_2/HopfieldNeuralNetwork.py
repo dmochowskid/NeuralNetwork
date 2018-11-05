@@ -41,21 +41,22 @@ class HopfieldNeuralNetwork:
         """Run the network using the input data until the output state doesn't change
         or a maximum number of iteration has been reached."""
         iteration_count = 0
-
+        row_size = len(input_pattern[0])
+        input_pattern = input_pattern.flatten()
         result = input_pattern.copy()
 
         while True:
-            show_plot(np.split(result, 7))
-
             update_list = list(range(self.n))
             random.shuffle(update_list)
+
+            show_plot(np.split(result, row_size), iteration_count, False)
 
             changed, result = self.run_once(update_list, result)
 
             iteration_count += 1
 
             if not changed:
-                return np.split(result, 7)
+                return np.split(result, row_size)
 
     def calculate_weight(self, i, j, patterns):
         num_patterns = len(patterns)
@@ -88,4 +89,3 @@ class HopfieldNeuralNetwork:
             weights[i] = self.calculate_neuron_weights(i, input_patterns)
 
         self.weights = weights
-

@@ -24,10 +24,15 @@ def get_random_image(column_size, row_size):
     return random_image
 
 
-def show_plot(image):
+def show_plot(image, title='Image', color_reversed=True):
     """image - image in two dimensions"""
+    image_copy = image.copy()
+    if color_reversed:
+        for i in range(len(image)):
+            for j in range(len(image[0])):
+                image_copy[i][j] = -1 if image[i][j] == 1 else 1
     plt.ylabel('Y')
     plt.xlabel('X')
-    plt.title('Image')
-    plt.imshow(image)
+    plt.title(title)
+    plt.imshow(image_copy)
     plt.show()
