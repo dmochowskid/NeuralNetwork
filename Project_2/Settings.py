@@ -4,8 +4,10 @@ class Settings:
         self.row_size = int()
         self.column_size = int()
 
-        self._prepare_demo_large_plus()
-        self.noise = 0.2
+        self._prepare_demo_small()
+        self.synchronous = False
+        self.noise = 0.5
+        self.test_image_index = 2
 
     def _prepare_demo_small(self):
         self.input_data_path = "./Data/small-7x7.csv"

@@ -13,12 +13,11 @@ def start():
     # training
     hopfield_neural_network = HopfieldNeuralNetwork(settings.row_size * settings.column_size)
     flatten_images = [np.array(image).flatten() for image in images]
-    hopfield_neural_network.hebbian_training(flatten_images)
+    hopfield_neural_network.train(flatten_images)
 
     # test
-    # random_image = get_random_image(settings.column_size, settings.row_size)
-    noised_image = add_noise(images[2], settings.noise)
-    result_image = hopfield_neural_network.run(np.array(noised_image))
+    noised_image = add_noise(images[settings.test_image_index], settings.noise)
+    result_image = hopfield_neural_network.test(np.array(noised_image), settings.synchronous)
     show_plot(result_image, "Result", False)
 
 
