@@ -4,7 +4,7 @@ class Settings:
         self.row_size = int()
         self.column_size = int()
 
-        self._prepare_demo_small()
+        self._prepare_demo_animals()
         self.noise = 0.1
 
     def _prepare_demo_small(self):
