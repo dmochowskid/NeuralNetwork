@@ -3,11 +3,13 @@ class Settings:
         self.input_data_path = ""
         self.row_size = int()
         self.column_size = int()
+        self.use_own_test = False
 
-        self._prepare_demo_cats()
+        self._prepare_demo_oscillation()
         self.synchronous = True
         self.noise = 0.30
-        self.test_image_index = 2
+        self.test_image_index = 1
+
 
     def _prepare_demo_small(self):
         self.input_data_path = "./Data/small-7x7.csv"
@@ -48,3 +50,11 @@ class Settings:
         self.input_data_path = "./Data/cats-50x100.csv"
         self.row_size = 50
         self.column_size = 100
+
+    def _prepare_demo_oscillation(self):
+        self.input_data_path = "./Data/oscillation.csv"
+        self.row_size = 2
+        self.column_size = 7
+        self.use_own_test = True
+        self.own_test = [[1, 1, 1, 1, 1, 1, 1],
+                         [-1, -1, -1, -1, -1, -1, -1]]
