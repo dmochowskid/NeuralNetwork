@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import random
+import matplotlib as mpl
 
 
 def prepare_input_data(input_data_path, row_size):
@@ -42,5 +43,9 @@ def show_plot(image, title='Image', color_reversed=True):
     plt.ylabel('Y')
     plt.xlabel('X')
     plt.title(title)
-    plt.imshow(image_copy)
+    colors = ['black', 'white', 'orange', 'blue', 'yellow', 'purple']
+    bounds = [0, 1, 2, 3, 4, 5, 6]
+    cmap = mpl.colors.ListedColormap(colors)
+    norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
+    plt.imshow(image_copy, interpolation='none', cmap=cmap, norm=norm)
     plt.show()
